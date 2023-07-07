@@ -36,7 +36,10 @@
     ```
 
 ## Create Database w/ Sample data
-- Create Database (airbnb) w/ sample data 
+- SQL Diagram
+![AIRBNB_DIAGRAM](./images/sql_diagram.jpg)
+
+- Create Database w/ sample data 
     ```SQL
     CREATE DATABASE airbnb;
 
@@ -48,7 +51,7 @@
         email VARCHAR(255) NOT NULL UNIQUE,
         bio TEXT,
         country VARCHAR(2)
-    )
+    );
 
     INSERT INTO Users (user_name, email, bio, country)
     VALUES 
@@ -72,7 +75,7 @@
         updated_at datetime,
         PRIMARY KEY (id),
         FOREIGN KEY (owner_id) REFERENCES Users(id)
-    )
+    );
 
     INSERT INTO Rooms (owner_id, price, hot_tub, total_bedrooms, total_bathrooms, address, created_at, updated_at)
     VALUES 
@@ -103,3 +106,19 @@
         (5, 3, '2023-10-01', '2023-10-09', 1600);
     ```
     
+SELECT * FROM Users
+LEFT JOIN Rooms
+On Rooms.owner_id = Users.id;
+
+SELECT * FROM Rooms
+
+SELECT *
+FROM Bookings
+LEFT JOIN Rooms ON Rooms.owner_id = guest_id
+WHERE guest_id = 2
+
+
+SELECT *
+FROM Bookings
+INNER JOIN Users On Users.id = guest_id
+WHERE room_id = 2
